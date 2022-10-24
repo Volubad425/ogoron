@@ -8,6 +8,7 @@ module.exports = {
         const embed = new Discord.EmbedBuilder()
             .setColor(message.member.displayHexColor)
             .setTitle("🏓 Pong !")
+            .setTimestamp()
             .addFields(
                 { name: 'Latence :', value: `\`${ping}ms\``},
                 { name: 'API :', value: `\`${client.ws.ping}ms\``},

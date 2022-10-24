@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require("fs");
+const config = require('./config.json');
 
 const client = new Discord.Client({ intents: [
     Discord.GatewayIntentBits.Guilds,
@@ -22,7 +23,7 @@ fs.readdirSync('./events/').filter(f => f.endsWith(".js")).forEach(async functio
 });
 
 client.on("messageCreate", async function(message){
-    let prefix = process.env.TOKEN;
+    let prefix = config.prefix;
 
     if(!message.content.startsWith(prefix)) return;
 
