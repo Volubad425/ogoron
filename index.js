@@ -31,7 +31,7 @@ client.on("messageCreate", async function(message){
 
 
     let cmd = client.commands.get(command);
-    if(!cmd) return message.reply("Cette commande n'existe pas");
+    if(!cmd) return;
 
     cmd.run(client, message, args);
 });
