@@ -23,7 +23,7 @@ fs.readdirSync('./events/').filter(f => f.endsWith(".js")).forEach(async functio
 });
 
 client.on("messageCreate", async function(message){
-    let prefix = config.prefix;
+    let prefix = process.env.PREFIX;
 
     if(!message.content.startsWith(prefix)) return;
 
