@@ -1,10 +1,15 @@
 const Discord = require('discord.js');
-const fs = require("fs");
+const fs = require('fs');
+const config = require('./config.js');
 
 const client = new Discord.Client({ intents: [
     Discord.GatewayIntentBits.Guilds,
     Discord.GatewayIntentBits.GuildMessages,
-    Discord.GatewayIntentBits.MessageContent
+    Discord.GatewayIntentBits.MessageContent,
+    Discord.GatewayIntentBits.GuildMembers,
+    Discord.GatewayIntentBits.DirectMessages,
+    Discord.GatewayIntentBits.DirectMessageTyping,
+    Discord.GatewayIntentBits.DirectMessageReactions
 ]});
 
 client.commands = new Discord.Collection();
@@ -21,19 +26,4 @@ fs.readdirSync('./events/').filter(f => f.endsWith(".js")).forEach(async functio
     console.log(`Evenement chargé : [${file}]`);
 });
 
-client.on("messageCreate", async function(message){
-    let prefix = process.env.PREFIX;
-
-    if(!message.content.startsWith(prefix)) return;
-
-    let command = message.content.split(" ")[0].slice(prefix.length);
-    let args = message.content.split(" ").slice(1);
-
-
-    let cmd = client.commands.get(command);
-    if(!cmd) return;
-
-    cmd.run(client, message, args);
-});
-
-client.login(process.env.TOKEN);
+client.login(config.token);
